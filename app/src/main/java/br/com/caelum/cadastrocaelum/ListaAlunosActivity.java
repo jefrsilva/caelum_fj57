@@ -11,20 +11,23 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.util.List;
+
+import br.com.caelum.cadastrocaelum.dao.AlunoDAO;
+import br.com.caelum.cadastrocaelum.modelo.Aluno;
+
 
 public class ListaAlunosActivity extends Activity {
 
     private ListView listaAlunos;
+    private List<Aluno> alunos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.listagem_alunos);
 
-        String[] alunos = {"Anderson", "Filipe", "Guilherme"};
         this.listaAlunos = (ListView) findViewById(R.id.lista_alunos);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, alunos);
-        listaAlunos.setAdapter(adapter);
 
         listaAlunos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -36,11 +39,25 @@ public class ListaAlunosActivity extends Activity {
         listaAlunos.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> adapterView, View convertView, int posicao, long id) {
-                String aluno = (String) adapterView.getItemAtPosition(posicao);
-                Toast.makeText(ListaAlunosActivity.this, "Clique longo: " + aluno, Toast.LENGTH_LONG).show();
+                Aluno aluno = (Aluno) adapterView.getItemAtPosition(posicao);
+                Toast.makeText(ListaAlunosActivity.this, "Clique longo: " + aluno.getNome(), Toast.LENGTH_LONG).show();
                 return false;
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        this.carregaLista();
+    }
+
+    private void carregaLista() {
+        AlunoDAO dao = new AlunoDAO(this);
+        alunos = dao.getLista();
+        dao.close();
+        ArrayAdapter<Aluno> adapter = new ArrayAdapter<Aluno>(this, android.R.layout.simple_list_item_1, alunos);
+        listaAlunos.setAdapter(adapter);
     }
 
     @Override
