@@ -1,6 +1,7 @@
 package br.com.caelum.cadastrocaelum;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -52,7 +53,8 @@ public class ListaAlunosActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
             case R.id.menu_novo:
-                Toast.makeText(this, "Menu novo clicado", Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(this, FormularioActivity.class);
+                startActivity(intent);
                 return false;
             default:
                 return super.onOptionsItemSelected(item);
