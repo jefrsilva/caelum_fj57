@@ -20,6 +20,7 @@ import br.com.caelum.cadastrocaelum.converter.AlunoConverter;
 import br.com.caelum.cadastrocaelum.dao.AlunoDAO;
 import br.com.caelum.cadastrocaelum.extras.Extras;
 import br.com.caelum.cadastrocaelum.modelo.Aluno;
+import br.com.caelum.cadastrocaelum.support.WebClient;
 
 
 public class ListaAlunosActivity extends Activity {
@@ -89,8 +90,10 @@ public class ListaAlunosActivity extends Activity {
                 dao.close();
 
                 String json = new AlunoConverter().toJSON(alunos);
+                WebClient client = new WebClient("http://www.caelum.com.br/mobile");
 
-                Toast.makeText(this, json, Toast.LENGTH_LONG).show();
+                String resposta = client.post(json);
+                Toast.makeText(this, resposta, Toast.LENGTH_LONG).show();
                 return false;
             default:
                 return super.onOptionsItemSelected(item);
