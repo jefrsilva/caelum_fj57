@@ -2,12 +2,10 @@ package br.com.caelum.cadastrocaelum;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
+import br.com.caelum.cadastrocaelum.dao.AlunoDAO;
 import br.com.caelum.cadastrocaelum.modelo.Aluno;
 
 
@@ -27,7 +25,9 @@ public class FormularioActivity extends Activity {
             @Override
             public void onClick(View view) {
                 Aluno aluno = helper.pegaAlunoDoFormulario();
-                Toast.makeText(FormularioActivity.this, "Aluno preenchido: " + aluno.getNome(), Toast.LENGTH_LONG).show();
+                AlunoDAO dao = new AlunoDAO(FormularioActivity.this);
+                dao.insere(aluno);
+                dao.close();
                 finish();
             }
         });
