@@ -81,4 +81,11 @@ public class AlunoDAO extends SQLiteOpenHelper {
         values.put("caminhoFoto", aluno.getCaminhoFoto());
         getWritableDatabase().update(TABELA, values, "id = ?", new String[]{ aluno.getId().toString() });
     }
+
+    public boolean isAluno(String telefone) {
+        Cursor c = getReadableDatabase().rawQuery("SELECT telefone FROM " + TABELA + " WHERE telefone = ?", new String[]{ telefone });
+        int total = c.getCount();
+        c.close();
+        return total > 0;
+    }
 }
