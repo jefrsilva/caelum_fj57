@@ -16,6 +16,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import br.com.caelum.cadastrocaelum.adapter.ListaAlunosAdapter;
+import br.com.caelum.cadastrocaelum.converter.AlunoConverter;
 import br.com.caelum.cadastrocaelum.dao.AlunoDAO;
 import br.com.caelum.cadastrocaelum.extras.Extras;
 import br.com.caelum.cadastrocaelum.modelo.Aluno;
@@ -81,6 +82,15 @@ public class ListaAlunosActivity extends Activity {
             case R.id.menu_novo:
                 Intent intent = new Intent(this, FormularioActivity.class);
                 startActivity(intent);
+                return false;
+            case R.id.menu_enviar_alunos:
+                AlunoDAO dao = new AlunoDAO(this);
+                List<Aluno> alunos = dao.getLista();
+                dao.close();
+
+                String json = new AlunoConverter().toJSON(alunos);
+
+                Toast.makeText(this, json, Toast.LENGTH_LONG).show();
                 return false;
             default:
                 return super.onOptionsItemSelected(item);
