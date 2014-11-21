@@ -15,6 +15,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import br.com.caelum.cadastrocaelum.dao.AlunoDAO;
+import br.com.caelum.cadastrocaelum.extras.Extras;
 import br.com.caelum.cadastrocaelum.modelo.Aluno;
 
 
@@ -33,7 +34,10 @@ public class ListaAlunosActivity extends Activity {
         listaAlunos.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View convertView, int posicao, long id) {
-                Toast.makeText(ListaAlunosActivity.this, "Posição selecionada: " + posicao, Toast.LENGTH_LONG).show();
+                Intent edicao = new Intent(ListaAlunosActivity.this, FormularioActivity.class);
+                Aluno aluno = (Aluno) listaAlunos.getItemAtPosition(posicao);
+                edicao.putExtra(Extras.ALUNO_SELECIONADO, aluno);
+                startActivity(edicao);
             }
         });
 
