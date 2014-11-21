@@ -42,4 +42,20 @@ public class ListaAlunosActivity extends Activity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_principal, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()) {
+            case R.id.menu_novo:
+                Toast.makeText(this, "Menu novo clicado", Toast.LENGTH_LONG).show();
+                return false;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }
