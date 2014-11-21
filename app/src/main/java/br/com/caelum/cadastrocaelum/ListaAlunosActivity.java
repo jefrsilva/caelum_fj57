@@ -3,6 +3,7 @@ package br.com.caelum.cadastrocaelum;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -44,6 +45,8 @@ public class ListaAlunosActivity extends Activity {
                 return false;
             }
         });
+
+        registerForContextMenu(listaAlunos);
     }
 
     @Override
@@ -75,6 +78,27 @@ public class ListaAlunosActivity extends Activity {
                 return false;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo menuInfo) {
+        getMenuInflater().inflate(R.menu.menu_aluno, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.deletar:
+                AdapterView.AdapterContextMenuInfo menuInfo = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+                Aluno aluno = (Aluno) listaAlunos.getItemAtPosition(menuInfo.position);
+                AlunoDAO dao = new AlunoDAO(this);
+                dao.deletar(aluno);
+                dao.close();
+                carregaLista();
+                return true;
+            default:
+                return false;
         }
     }
 }

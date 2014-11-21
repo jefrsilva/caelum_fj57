@@ -66,4 +66,8 @@ public class AlunoDAO extends SQLiteOpenHelper {
         c.close();
         return alunos;
     }
+
+    public void deletar(Aluno aluno) {
+        getWritableDatabase().delete(TABELA, "id = ?", new String[]{aluno.getId().toString()});
+    }
 }
