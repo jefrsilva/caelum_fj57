@@ -2,6 +2,7 @@ package br.com.caelum.cadastrocaelum;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.Menu;
@@ -88,6 +89,34 @@ public class ListaAlunosActivity extends Activity {
     @Override
     public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo menuInfo) {
         getMenuInflater().inflate(R.menu.menu_aluno, menu);
+        AdapterView.AdapterContextMenuInfo adapterMenuInfo = (AdapterView.AdapterContextMenuInfo) menuInfo;
+        Aluno alunoSelecionado = (Aluno) listaAlunos.getItemAtPosition(adapterMenuInfo.position);
+
+        MenuItem itemLigar = menu.findItem(R.id.ligar);
+        Intent ligar = new Intent(Intent.ACTION_CALL);
+        ligar.setData(Uri.parse("tel:" + alunoSelecionado.getTelefone()));
+        itemLigar.setIntent(ligar);
+
+        MenuItem itemSms = menu.findItem(R.id.sms);
+        Intent sms = new Intent(Intent.ACTION_VIEW);
+        sms.setData(Uri.parse("sms:" + alunoSelecionado.getTelefone()));
+        sms.putExtra("sms_body", "Mensagem");
+        itemSms.setIntent(sms);
+
+        String siteDoAluno = alunoSelecionado.getSite();
+        if (!siteDoAluno.startsWith("http:")) {
+            siteDoAluno = "http:" + alunoSelecionado.getSite();
+        }
+
+        MenuItem itemSite = menu.findItem(R.id.site);
+        Intent site = new Intent(Intent.ACTION_VIEW);
+        site.setData(Uri.parse("http:" + siteDoAluno));
+        itemSite.setIntent(site);
+
+        MenuItem itemMapa = menu.findItem(R.id.mapa);
+        Intent mapa = new Intent(Intent.ACTION_VIEW);
+        mapa.setData(Uri.parse("geo:0,0?z=14&q=" + Uri.encode(alunoSelecionado.getEndereco())));
+        itemMapa.setIntent(mapa);
     }
 
     @Override
