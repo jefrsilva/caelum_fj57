@@ -2,12 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="br.com.caelum.cadastrocaelum" >
 
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
-    <uses-permission android:name="android.permission.READ_SMS"/>
-    <uses-permission android:name="android.permission.SEND_SMS"/>
-    <uses-permission android:name="android.permission.WRITE_SMS"/>
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.WRITE_SMS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.RECEIVE_SMS" />
 
     <application
@@ -15,9 +15,9 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
-
-        <receiver android:name="br.com.caelum.cadastrocaelum.receiver.SMSReceiver"
-            android:enabled="true">
+        <receiver
+            android:name="br.com.caelum.cadastrocaelum.receiver.SMSReceiver"
+            android:enabled="true" >
             <intent-filter>
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
@@ -35,6 +35,10 @@
         <activity
             android:name="br.com.caelum.cadastrocaelum.FormularioActivity"
             android:label="@string/title_activity_formulario" >
+        </activity>
+        <activity
+            android:name="br.com.caelum.cadastrocaelum.ProvasActivity"
+            android:label="@string/title_activity_provas" >
         </activity>
     </application>
 
