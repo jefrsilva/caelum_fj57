@@ -21,6 +21,7 @@ import br.com.caelum.cadastrocaelum.dao.AlunoDAO;
 import br.com.caelum.cadastrocaelum.extras.Extras;
 import br.com.caelum.cadastrocaelum.modelo.Aluno;
 import br.com.caelum.cadastrocaelum.support.WebClient;
+import br.com.caelum.cadastrocaelum.task.EnviaContatosTask;
 
 
 public class ListaAlunosActivity extends Activity {
@@ -85,15 +86,7 @@ public class ListaAlunosActivity extends Activity {
                 startActivity(intent);
                 return false;
             case R.id.menu_enviar_alunos:
-                AlunoDAO dao = new AlunoDAO(this);
-                List<Aluno> alunos = dao.getLista();
-                dao.close();
-
-                String json = new AlunoConverter().toJSON(alunos);
-                WebClient client = new WebClient("http://www.caelum.com.br/mobile");
-
-                String resposta = client.post(json);
-                Toast.makeText(this, resposta, Toast.LENGTH_LONG).show();
+                new EnviaContatosTask(this).execute();
                 return false;
             default:
                 return super.onOptionsItemSelected(item);

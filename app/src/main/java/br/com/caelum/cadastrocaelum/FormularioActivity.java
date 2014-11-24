@@ -15,7 +15,6 @@ import br.com.caelum.cadastrocaelum.dao.AlunoDAO;
 import br.com.caelum.cadastrocaelum.extras.Extras;
 import br.com.caelum.cadastrocaelum.modelo.Aluno;
 
-
 public class FormularioActivity extends Activity {
 
     private FormularioHelper helper;
