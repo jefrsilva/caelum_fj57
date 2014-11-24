@@ -63,6 +63,16 @@ public class ListaAlunosAdapter extends BaseAdapter {
             view.setBackgroundColor(activity.getResources().getColor(R.color.linha_par));
         }
 
+        TextView telefone = (TextView) view.findViewById(R.id.telefone);
+        if (telefone != null) {
+            telefone.setText(aluno.getTelefone());
+        }
+
+        TextView site = (TextView) view.findViewById(R.id.site);
+        if (site != null) {
+            site.setText(aluno.getSite());
+        }
+
         return view;
     }
 }
