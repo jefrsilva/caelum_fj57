@@ -3,7 +3,6 @@ package br.com.caelum.cadastrocaelum.util;
 import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
-
 import com.google.android.gms.maps.model.LatLng;
 
 import java.io.IOException;
