@@ -92,6 +92,10 @@ public class ListaAlunosActivity extends Activity {
                 Intent provas = new Intent(this, ProvasActivity.class);
                 startActivity(provas);
                 return false;
+            case R.id.menu_mapa:
+                Intent mapa = new Intent(this, MostraAlunosProximosActivity.class);
+                startActivity(mapa);
+                return false;
             default:
                 return super.onOptionsItemSelected(item);
         }
