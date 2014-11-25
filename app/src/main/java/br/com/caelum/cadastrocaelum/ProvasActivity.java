@@ -6,10 +6,9 @@ import android.os.Bundle;
 
 import br.com.caelum.cadastrocaelum.fragment.DetalhesProvaFragment;
 import br.com.caelum.cadastrocaelum.fragment.ListaProvasFragment;
-
+import br.com.caelum.cadastrocaelum.modelo.Prova;
 
 public class ProvasActivity extends Activity {
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,5 +29,16 @@ public class ProvasActivity extends Activity {
         return getResources().getBoolean(R.bool.isTablet);
     }
 
+    public void selecionaProva(Prova prova) {
+        Bundle argumentos = new Bundle();
+        argumentos.putSerializable("prova", prova);
 
+        DetalhesProvaFragment detalhesProva = new DetalhesProvaFragment();
+        detalhesProva.setArguments(argumentos);
+
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.provas_view, detalhesProva);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
 }
