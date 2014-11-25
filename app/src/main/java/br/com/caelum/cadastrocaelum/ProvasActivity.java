@@ -38,7 +38,11 @@ public class ProvasActivity extends Activity {
 
         FragmentTransaction transaction = getFragmentManager().beginTransaction();
         transaction.replace(R.id.provas_view, detalhesProva);
-        transaction.addToBackStack(null);
+
+        if (!isTablet()) {
+            transaction.addToBackStack(null);
+        }
+
         transaction.commit();
     }
 }
